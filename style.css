@@ -1,0 +1,250 @@
+/* style.css — Coach Espiritual — Tema claro elegante */
+
+:root {
+    --color-primario: #5B4FA0;
+    --color-primario-claro: #7B6FC0;
+    --color-fondo: #FAFAFA;
+    --color-superficie: #FFFFFF;
+    --color-texto: #2C2C2C;
+    --color-texto-secundario: #666666;
+    --color-borde: #E0E0E0;
+    --color-acento: #9B59B6;
+    --sombra: 0 2px 8px rgba(0,0,0,0.08);
+    --radio: 12px;
+    --fuente-base: 18px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    font-size: var(--fuente-base);
+    line-height: 1.6;
+    color: var(--color-texto);
+    background: var(--color-fondo);
+    min-height: 100vh;
+}
+
+/* Cabecera */
+header {
+    background: linear-gradient(135deg, var(--color-primario), var(--color-acento));
+    color: white;
+    padding: 1.5rem 1rem;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+header .subtitulo {
+    font-size: 0.95rem;
+    opacity: 0.85;
+}
+
+/* Contenedor principal */
+.contenedor {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+/* Tarjeta genérica */
+.tarjeta {
+    background: var(--color-superficie);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.tarjeta h2 {
+    font-size: 1.2rem;
+    color: var(--color-primario);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-borde);
+}
+
+.tarjeta h3 {
+    font-size: 1rem;
+    color: var(--color-texto-secundario);
+    margin-bottom: 0.5rem;
+}
+
+/* Eje temático del día */
+.eje-dia {
+    background: linear-gradient(135deg, var(--color-primario), var(--color-primario-claro));
+    color: white;
+    border-radius: var(--radio);
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.eje-dia .etiqueta {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+.eje-dia .nombre-eje {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0.3rem;
+}
+
+/* Reproductor audio */
+.reproductor {
+    margin: 1rem 0;
+}
+
+.reproductor audio {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.reproductor .titulo-audio {
+    font-size: 0.95rem;
+    color: var(--color-texto-secundario);
+    margin-bottom: 0.5rem;
+}
+
+/* Visor de texto (meditaciones/reflexiones) */
+.visor-texto {
+    background: #F5F3FF;
+    border-left: 4px solid var(--color-primario);
+    border-radius: 0 var(--radio) var(--radio) 0;
+    padding: 1.2rem;
+    margin: 1rem 0;
+    font-style: italic;
+    line-height: 1.8;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Historial */
+.historial-item {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--color-borde);
+    gap: 1rem;
+}
+
+.historial-item:last-child {
+    border-bottom: none;
+}
+
+.historial-fecha {
+    font-size: 0.85rem;
+    color: var(--color-texto-secundario);
+    min-width: 80px;
+}
+
+.historial-titulo {
+    flex: 1;
+    font-weight: 500;
+}
+
+.historial-play {
+    background: var(--color-primario);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.historial-play:hover {
+    background: var(--color-primario-claro);
+}
+
+/* Estado vacío / error */
+.estado-vacio {
+    text-align: center;
+    padding: 2rem;
+    color: var(--color-texto-secundario);
+}
+
+.estado-vacio .icono {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Configuración API key */
+.config-panel {
+    background: #FFF3CD;
+    border: 1px solid #FFEEBA;
+    border-radius: var(--radio);
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.config-panel input {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+    font-size: 1rem;
+    margin: 0.5rem 0;
+}
+
+.config-panel button {
+    background: var(--color-primario);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+/* Cargando */
+.cargando {
+    text-align: center;
+    padding: 2rem;
+}
+
+.cargando .spinner {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--color-borde);
+    border-top-color: var(--color-primario);
+    border-radius: 50%;
+    animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    :root { --fuente-base: 16px; }
+    header { padding: 1rem; }
+    header h1 { font-size: 1.3rem; }
+    .contenedor { padding: 0.5rem; }
+    .tarjeta { padding: 1rem; }
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--color-texto-secundario);
+    font-size: 0.85rem;
+}

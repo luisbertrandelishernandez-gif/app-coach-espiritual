@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coach Espiritual — Antigravity</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127774;</text></svg>">
+</head>
+<body>
+    <header>
+        <h1>Coach Espiritual</h1>
+        <p class="subtitulo">Podcasts y meditaciones diarias</p>
+    </header>
+
+    <main class="contenedor">
+        <!-- Panel configuración API key (oculto por defecto) -->
+        <div id="config-api" class="config-panel" style="display:none;">
+            <p><strong>Configuración inicial</strong></p>
+            <p>Introduce la API key de Google Drive para acceder al contenido:</p>
+            <input type="text" id="input-api-key" placeholder="AIzaSy...">
+            <button onclick="guardarApiKey()">Guardar</button>
+        </div>
+
+        <!-- Eje temático del día -->
+        <div class="eje-dia">
+            <div class="etiqueta" id="eje-fecha">Cargando...</div>
+            <div class="nombre-eje" id="eje-nombre">—</div>
+        </div>
+
+        <!-- Contenido del día (podcast + meditación) -->
+        <div class="tarjeta">
+            <h2>Hoy</h2>
+            <div id="contenido-hoy">
+                <div class="cargando">
+                    <div class="spinner"></div>
+                    <p>Cargando contenido...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Historial últimos 7 días -->
+        <div class="tarjeta">
+            <h2>Historial reciente</h2>
+            <div id="historial">
+                <div class="cargando">
+                    <div class="spinner"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        Antigravity — Coach Espiritual &copy; 2026
+    </footer>
+
+    <script src="drive-reader.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

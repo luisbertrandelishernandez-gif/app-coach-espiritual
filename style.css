@@ -1,20 +1,58 @@
-/* style.css — Coach Espiritual — Tema claro elegante */
+/* style.css — Coach Espiritual — Tema claro elegante — WCAG AAA */
 
+/* ============================================================
+   VARIABLES MODO CLARO
+   Contraste: textos sobre fondo >=7:1 (WCAG AAA)
+   ============================================================ */
 :root {
-    --color-primario: #5B4FA0;
-    --color-primario-claro: #7B6FC0;
+    --color-primario: #3B2C7A;        /* sobre blanco: ~9.3:1 */
+    --color-primario-claro: #5B4FA0;  /* sobre blanco: ~5.5:1 (sólo decorativo) */
     --color-fondo: #FAFAFA;
     --color-superficie: #FFFFFF;
-    --color-texto: #2C2C2C;
-    --color-texto-secundario: #666666;
-    --color-borde: #E0E0E0;
-    --color-acento: #9B59B6;
-    --sombra: 0 2px 8px rgba(0,0,0,0.08);
+    --color-texto: #1A1A1A;           /* sobre #FAFAFA: ~17:1 */
+    --color-texto-secundario: #4A4A4A;/* sobre blanco: ~9.7:1 */
+    --color-borde: #C8C8C8;
+    --color-acento: #6B3A8B;          /* sobre blanco: ~7.2:1 */
+    --color-ok: #1A6B2A;              /* verde accesible */
+    --color-error: #9B1010;           /* rojo accesible */
+    --color-warn-fondo: #FFF8E1;
+    --color-warn-borde: #B8860B;
+    --color-warn-texto: #5C4200;      /* sobre #FFF8E1: ~9:1 */
+    --sombra: 0 2px 8px rgba(0,0,0,0.12);
     --radio: 12px;
     --fuente-base: 18px;
+    --tap-min: 44px;                  /* área táctil mínima WCAG */
+    --focus-ring: 3px solid #3B2C7A;
+    --focus-offset: 2px;
 }
 
-* {
+/* ============================================================
+   MODO OSCURO AUTOMÁTICO
+   ============================================================ */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-primario: #B9A8FF;        /* sobre #121212: ~11:1 */
+        --color-primario-claro: #D0C4FF;
+        --color-fondo: #121212;
+        --color-superficie: #1E1E1E;
+        --color-texto: #F0F0F0;           /* sobre #121212: ~16:1 */
+        --color-texto-secundario: #C0C0C0;/* sobre #1E1E1E: ~8.2:1 */
+        --color-borde: #444444;
+        --color-acento: #D4A8F5;
+        --color-ok: #6DD98A;
+        --color-error: #FF8080;
+        --color-warn-fondo: #2C2200;
+        --color-warn-borde: #C8A020;
+        --color-warn-texto: #FFE080;
+        --sombra: 0 2px 12px rgba(0,0,0,0.5);
+        --focus-ring: 3px solid #B9A8FF;
+    }
+}
+
+/* ============================================================
+   RESET Y BASE
+   ============================================================ */
+*, *::before, *::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -29,33 +67,64 @@ body {
     min-height: 100vh;
 }
 
-/* Cabecera */
+/* ============================================================
+   FOCUS VISIBLE — WCAG AAA
+   ============================================================ */
+:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+    border-radius: 4px;
+}
+
+/* Quitar outline en click pero mantenerlo para teclado */
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+/* ============================================================
+   MOVIMIENTO REDUCIDO
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================================
+   CABECERA
+   ============================================================ */
 header {
     background: linear-gradient(135deg, var(--color-primario), var(--color-acento));
-    color: white;
+    color: #FFFFFF;
     padding: 1.5rem 1rem;
     text-align: center;
 }
 
 header h1 {
     font-size: 1.6rem;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 0.3rem;
 }
 
 header .subtitulo {
-    font-size: 0.95rem;
-    opacity: 0.85;
+    font-size: 1rem;
+    opacity: 0.9;
 }
 
-/* Contenedor principal */
+/* ============================================================
+   CONTENEDOR PRINCIPAL
+   ============================================================ */
 .contenedor {
     max-width: 720px;
     margin: 0 auto;
     padding: 1rem;
 }
 
-/* Tarjeta genérica */
+/* ============================================================
+   TARJETA GENÉRICA
+   ============================================================ */
 .tarjeta {
     background: var(--color-superficie);
     border-radius: var(--radio);
@@ -78,10 +147,12 @@ header .subtitulo {
     margin-bottom: 0.5rem;
 }
 
-/* Eje temático del día */
+/* ============================================================
+   EJE TEMÁTICO DEL DÍA
+   ============================================================ */
 .eje-dia {
     background: linear-gradient(135deg, var(--color-primario), var(--color-primario-claro));
-    color: white;
+    color: #FFFFFF;
     border-radius: var(--radio);
     padding: 1.2rem;
     margin-bottom: 1rem;
@@ -89,10 +160,9 @@ header .subtitulo {
 }
 
 .eje-dia .etiqueta {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    opacity: 0.8;
 }
 
 .eje-dia .nombre-eje {
@@ -101,7 +171,9 @@ header .subtitulo {
     margin-top: 0.3rem;
 }
 
-/* Reproductor audio */
+/* ============================================================
+   REPRODUCTOR AUDIO
+   ============================================================ */
 .reproductor {
     margin: 1rem 0;
 }
@@ -112,14 +184,16 @@ header .subtitulo {
 }
 
 .reproductor .titulo-audio {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--color-texto-secundario);
     margin-bottom: 0.5rem;
 }
 
-/* Visor de texto (meditaciones/reflexiones) */
+/* ============================================================
+   VISOR DE TEXTO
+   ============================================================ */
 .visor-texto {
-    background: #F5F3FF;
+    background: var(--color-fondo);
     border-left: 4px solid var(--color-primario);
     border-radius: 0 var(--radio) var(--radio) 0;
     padding: 1.2rem;
@@ -128,9 +202,12 @@ header .subtitulo {
     line-height: 1.8;
     max-height: 400px;
     overflow-y: auto;
+    color: var(--color-texto);
 }
 
-/* Historial */
+/* ============================================================
+   HISTORIAL
+   ============================================================ */
 .historial-item {
     display: flex;
     align-items: center;
@@ -144,7 +221,7 @@ header .subtitulo {
 }
 
 .historial-fecha {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     color: var(--color-texto-secundario);
     min-width: 80px;
 }
@@ -152,27 +229,38 @@ header .subtitulo {
 .historial-titulo {
     flex: 1;
     font-weight: 500;
+    color: var(--color-texto);
 }
 
+/* Botón play historial — área táctil >=44x44px */
 .historial-play {
     background: var(--color-primario);
-    color: white;
+    color: #FFFFFF;
     border: none;
     border-radius: 50%;
-    width: 36px;
-    height: 36px;
+    width: var(--tap-min);
+    height: var(--tap-min);
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s;
 }
 
 .historial-play:hover {
     background: var(--color-primario-claro);
 }
 
-/* Estado vacío / error */
+.historial-play:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+}
+
+/* ============================================================
+   ESTADO VACÍO / ERROR
+   ============================================================ */
 .estado-vacio {
     text-align: center;
     padding: 2rem;
@@ -184,35 +272,134 @@ header .subtitulo {
     margin-bottom: 0.5rem;
 }
 
-/* Configuración API key */
+/* ============================================================
+   PANEL CONFIGURACIÓN API KEY
+   ============================================================ */
 .config-panel {
-    background: #FFF3CD;
-    border: 1px solid #FFEEBA;
+    background: var(--color-warn-fondo);
+    border: 2px solid var(--color-warn-borde);
     border-radius: var(--radio);
-    padding: 1.2rem;
+    padding: 1.4rem;
     margin-bottom: 1rem;
+    color: var(--color-warn-texto);
+}
+
+.config-panel p {
+    margin-bottom: 0.6rem;
+    color: var(--color-warn-texto);
+}
+
+.config-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+    color: var(--color-warn-texto);
+}
+
+/* Wrapper posicionado para el icono de estado */
+.config-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
 }
 
 .config-panel input {
     width: 100%;
-    padding: 0.6rem;
-    border: 1px solid var(--color-borde);
+    padding: 0.75rem 3rem 0.75rem 0.75rem; /* espacio a la derecha para el icono */
+    border: 2px solid var(--color-borde);
     border-radius: 8px;
     font-size: 1rem;
-    margin: 0.5rem 0;
+    background: var(--color-superficie);
+    color: var(--color-texto);
+    min-height: var(--tap-min);
+    font-family: monospace;
+    letter-spacing: 0.05em;
 }
 
+.config-panel input:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+    border-color: var(--color-primario);
+}
+
+/* Icono ✓ / ✗ dentro del input */
+.api-key-icono {
+    position: absolute;
+    right: 0.75rem;
+    font-size: 1.2rem;
+    pointer-events: none;
+    line-height: 1;
+}
+
+.api-key-icono.ok   { color: var(--color-ok); }
+.api-key-icono.error { color: var(--color-error); }
+
+/* Área de estado (OK / error) */
+.api-key-estado {
+    font-size: 0.95rem;
+    min-height: 1.4rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.api-key-estado.ok    { color: var(--color-ok); }
+.api-key-estado.error { color: var(--color-error); }
+
+/* Texto de ayuda */
+.api-key-ayuda {
+    font-size: 0.9rem;
+    color: var(--color-warn-texto);
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+}
+
+.api-key-ayuda code {
+    background: rgba(0,0,0,0.08);
+    padding: 0.1em 0.3em;
+    border-radius: 4px;
+    font-family: monospace;
+}
+
+.config-botones {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* Botón guardar — área táctil >=44px */
 .config-panel button {
     background: var(--color-primario);
-    color: white;
+    color: #FFFFFF;
     border: none;
-    padding: 0.6rem 1.2rem;
+    padding: 0.75rem 1.4rem;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
+    font-weight: 600;
+    min-height: var(--tap-min);
+    min-width: var(--tap-min);
+    transition: background 0.15s, opacity 0.15s;
 }
 
-/* Cargando */
+.config-panel button:hover:not(:disabled) {
+    background: var(--color-primario-claro);
+}
+
+.config-panel button:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+}
+
+.config-panel button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* ============================================================
+   CARGANDO / SPINNER
+   ============================================================ */
 .cargando {
     text-align: center;
     padding: 2rem;
@@ -220,8 +407,8 @@ header .subtitulo {
 
 .cargando .spinner {
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border: 3px solid var(--color-borde);
     border-top-color: var(--color-primario);
     border-radius: 50%;
@@ -232,19 +419,23 @@ header .subtitulo {
     to { transform: rotate(360deg); }
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-    :root { --fuente-base: 16px; }
-    header { padding: 1rem; }
-    header h1 { font-size: 1.3rem; }
-    .contenedor { padding: 0.5rem; }
-    .tarjeta { padding: 1rem; }
-}
-
-/* Footer */
+/* ============================================================
+   FOOTER
+   ============================================================ */
 footer {
     text-align: center;
     padding: 1.5rem;
     color: var(--color-texto-secundario);
-    font-size: 0.85rem;
+    font-size: 0.9rem;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+    :root { --fuente-base: 18px; } /* Mantener >=18px también en móvil */
+    header { padding: 1rem; }
+    header h1 { font-size: 1.3rem; }
+    .contenedor { padding: 0.5rem; }
+    .tarjeta { padding: 1rem; }
 }

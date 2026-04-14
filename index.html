@@ -15,11 +15,38 @@
 
     <main class="contenedor">
         <!-- Panel configuración API key (oculto por defecto) -->
-        <div id="config-api" class="config-panel" style="display:none;">
+        <div id="config-api" class="config-panel" style="display:none;" role="region" aria-label="Configuración de API key">
             <p><strong>Configuración inicial</strong></p>
             <p>Introduce la API key de Google Drive para acceder al contenido:</p>
-            <input type="text" id="input-api-key" placeholder="AIzaSy...">
-            <button onclick="guardarApiKey()">Guardar</button>
+
+            <label for="input-api-key" class="config-label">API key de Google Drive</label>
+            <div class="config-input-wrap">
+                <input
+                    type="text"
+                    id="input-api-key"
+                    placeholder="AIzaSy..."
+                    autocomplete="off"
+                    spellcheck="false"
+                    aria-describedby="api-key-ayuda api-key-estado"
+                    maxlength="39"
+                >
+                <span id="api-key-icono" class="api-key-icono" aria-hidden="true"></span>
+            </div>
+
+            <!-- Indicador de estado / validación -->
+            <div id="api-key-estado" class="api-key-estado" role="status" aria-live="polite"></div>
+
+            <!-- Ayuda contextual -->
+            <p id="api-key-ayuda" class="api-key-ayuda">
+                La key debe empezar por <code>AIzaSy</code> y tener exactamente 39 caracteres.
+                Asegúrate de que la API de Google Drive está habilitada en tu proyecto de Google Cloud.
+            </p>
+
+            <div class="config-botones">
+                <button id="btn-guardar-key" onclick="guardarApiKey()" disabled>
+                    Verificar y guardar
+                </button>
+            </div>
         </div>
 
         <!-- Eje temático del día -->
@@ -33,7 +60,7 @@
             <h2>Hoy</h2>
             <div id="contenido-hoy">
                 <div class="cargando">
-                    <div class="spinner"></div>
+                    <div class="spinner" role="status" aria-label="Cargando contenido"></div>
                     <p>Cargando contenido...</p>
                 </div>
             </div>
@@ -44,7 +71,7 @@
             <h2>Historial reciente</h2>
             <div id="historial">
                 <div class="cargando">
-                    <div class="spinner"></div>
+                    <div class="spinner" role="status" aria-label="Cargando historial"></div>
                 </div>
             </div>
         </div>

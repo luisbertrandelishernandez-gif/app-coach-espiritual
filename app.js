@@ -59,22 +59,31 @@ function validarFormatoApiKey(key) {
 /**
  * Hace una llamada mínima a Drive API para verificar que la key
  * es válida y la API está habilitada.
- * Endpoint: GET /drive/v3/about?fields=user&key=KEY
+ *
+ * IMPORTANTE: El endpoint /about?fields=user NO acepta API keys
+ * (requiere OAuth2). Usamos /files con pageSize=1 que SÍ funciona
+ * con API key para verificar la conexión.
+ *
  * @param {string} key
  * @returns {Promise<{ ok: boolean, mensaje: string }>}
  */
 async function testApiKeyEnVivo(key) {
-    const url = `https://www.googleapis.com/drive/v3/about?fields=user&key=${encodeURIComponent(key)}`;
+    // Usamos files.list con pageSize=1 como test ligero — acepta API key
+    const params = new URLSearchParams({
+        key: key,
+        pageSize: '1',
+        fields: 'files(id)',
+        q: `'${FOLDER_PODCASTS}' in parents and trashed=false`,
+        supportsAllDrives: 'true',
+        includeItemsFromAllDrives: 'true'
+    });
+    const url = `https://www.googleapis.com/drive/v3/files?${params}`;
     try {
         const resp = await fetch(url);
         if (resp.ok) {
-            const data = await resp.json();
-            const email = data?.user?.emailAddress || '';
             return {
                 ok: true,
-                mensaje: email
-                    ? `Conexión OK — cuenta: ${email}`
-                    : 'Conexión a Drive API correcta.'
+                mensaje: 'Conexión a Drive API correcta.'
             };
         }
         // Error HTTP: leer el cuerpo para dar un mensaje útil

@@ -24,9 +24,12 @@ async function listFolderContents(folderId, mimeType, maxResults = 50) {
     const params = new URLSearchParams({
         q: query,
         key: API_KEY,
-        fields: 'files(id,name,mimeType,createdTime,size)',
+        fields: 'files(id,name,mimeType,createdTime,size,webContentLink)',
         orderBy: 'createdTime desc',
-        pageSize: String(maxResults)
+        pageSize: String(maxResults),
+        // Necesarios para que funcione con API key en carpetas públicas
+        supportsAllDrives: 'true',
+        includeItemsFromAllDrives: 'true'
     });
 
     const url = `https://www.googleapis.com/drive/v3/files?${params}`;
